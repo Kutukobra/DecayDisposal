@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Get Axis Direction;
-        direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Vertical");
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.y = Input.GetAxisRaw("Vertical");
         direction.Normalize();
 
         isMoving = direction != Vector2.zero;
