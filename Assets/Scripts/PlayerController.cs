@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Vector2 direction;
     private Vector2 facingDirection;
+    private Vector2 facingDirectionAttacking;
 
     [SerializeField]
     private Vector2 mousePosition;
@@ -23,10 +24,13 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public Transform weaponParent;
+    public float attackSpeed = 2f;
+    public float nextAttackTime = 0;
 
     public WeaponMelee weapon;
 
     bool isMoving = false;
+    bool isAttacking = false;
 
     void Start()
     {
@@ -52,6 +56,9 @@ public class PlayerController : MonoBehaviour
 
         weaponParent.right = facingDirection;
 
+        // Attack Cooldown
+        isAttacking = Time.time < nextAttackTime;
+
         if (Input.GetMouseButton(0))
         {            
             Attack();
@@ -65,8 +72,13 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if  (Time.time < weapon.nextAttackTime)
+        // Guard Clause Cooldown.
+        if (isAttacking)
             return;
+
+        nextAttackTime = Time.time + (1f / attackSpeed);
+
+        facingDirectionAttacking = facingDirection;
 
         animator.SetTrigger("Attack");
         weapon.Attack();
@@ -76,7 +88,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        return new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
+        Vector2 facing = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized;
+
+        return isAttacking ? facingDirectionAttacking : facing;
     }
 
     private void UpdatePosition()

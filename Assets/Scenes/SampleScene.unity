@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 448285792}
   - component: {fileID: 448285794}
   - component: {fileID: 448285793}
+  - component: {fileID: 448285795}
   m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
@@ -3464,6 +3465,59 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!68 &448285795
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448285791}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -6.1438675, y: 9.0172825}
+  - {x: -6.1385612, y: 7.991736}
+  - {x: -6.076505, y: 6.1414614}
+  - {x: -9.167036, y: 6.0470457}
+  - {x: -9.1125, y: -3.113135}
+  - {x: -5.1217403, y: -3.1168573}
+  - {x: -5.0308323, y: -4.964054}
+  - {x: 11.002322, y: -5.0097585}
+  - {x: 11.064849, y: -2.067839}
+  - {x: 15.050048, y: -2.1339703}
+  - {x: 15.102205, y: 7.107485}
+  - {x: 12.012912, y: 7.1128464}
+  - {x: 12.039901, y: 9.072319}
+  - {x: -5.9909887, y: 9.072318}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3501,7 +3555,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 0}
+  m_BackGroundColor: {r: 0.22352943, g: 0.1254902, b: 0.12941177, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3604,6 +3658,7 @@ GameObject:
   - component: {fileID: 868900622}
   - component: {fileID: 868900621}
   - component: {fileID: 868900623}
+  - component: {fileID: 868900624}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -3695,6 +3750,8 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   mousePosition: {x: 0, y: 0}
   weaponParent: {fileID: 2028680051}
+  attackSpeed: 2
+  nextAttackTime: 0
   weapon: {fileID: 1166332336}
 --- !u!50 &868900622
 Rigidbody2D:
@@ -3722,7 +3779,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &868900623
 Animator:
   serializedVersion: 5
@@ -3744,6 +3801,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!58 &868900624
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868900618}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04, y: -0.02}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!1 &1166332332
 GameObject:
   m_ObjectHideFlags: 0
@@ -3843,11 +3935,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 0.7
   attackDamage: 10
-  attackSpeed: 2
   effectLayer:
     serializedVersion: 2
     m_Bits: 64
-  nextAttackTime: 0
 --- !u!1 &1476038699
 GameObject:
   m_ObjectHideFlags: 0
