@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
+    void Awake()
+    {
+        Refill();
+    }
+
     public bool isDead 
     {
         get;
@@ -12,11 +17,8 @@ public class HealthComponent : MonoBehaviour
 
     public float maxHealth = 100;
 
-    public float health 
-    {
-        get;
-        private set;
-    }
+    [SerializeField]
+    public float health;
 
     public void Refill()
     {
@@ -25,6 +27,7 @@ public class HealthComponent : MonoBehaviour
     
     public void TakeDamage(float value)
     {
+        Debug.Log("Taking damage.");
         health -= value;
 
         isDead = health <= 0;

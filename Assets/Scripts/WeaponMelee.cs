@@ -25,8 +25,8 @@ public class WeaponMelee : MonoBehaviour
 
         foreach(var target in hitTargets)
         {
-            Debug.Log(target.gameObject);
-            target.gameObject.GetComponent<HealthComponent>()?.TakeDamage(attackDamage);
+            Debug.Log("Hit " + target.name);
+            target.gameObject.GetComponent<HealthComponent>().TakeDamage(attackDamage);
         }
 
     }
