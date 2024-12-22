@@ -35,7 +35,7 @@ public class RandomWalk
         {
             walk.Add(currentPosition);
             
-            newPosition = currentPosition + GetRandomDirection();
+            newPosition = currentPosition + Direction2D.GetRandomDirection();
 
             currentPosition = newPosition;
         }
@@ -43,30 +43,4 @@ public class RandomWalk
         return walk;
     }
 
-    // Random up, right, left, or down randomly
-    private static Vector2Int GetRandomDirection()
-    {
-        int directionIndex = Random.Range(0, 4);
-
-        var direction = new Vector2Int();
-        switch(directionIndex)
-        {
-            case 0:
-                direction = Vector2Int.up;
-                break;
-
-            case 1:
-                direction = Vector2Int.right;
-                break;
-
-            case 2:
-                direction = Vector2Int.down;
-                break;
-
-            case 3:
-                direction = Vector2Int.left;
-                break;
-        }
-        return direction;
-    }
 }

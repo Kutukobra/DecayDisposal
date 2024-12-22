@@ -425,13 +425,13 @@ Tilemap:
       e12: 6.03e-43
       e13: 6.03e-43
       e20: 9.144214e+31
-      e21: -3.5555995e-18
-      e22: -7.802621e-29
-      e23: -0.00000018555625
+      e21: -4.672214e-12
+      e22: -9.231045e-29
+      e23: 3.6894755e+19
       e30: 4.5904e-41
       e31: 6.05e-43
       e32: 6.03e-43
-      e33: 6.03e-43
+      e33: 6.05e-43
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: -3.7001997e+19, g: -3.7001997e+19, b: -3.7001997e+19, a: -3.7001997e+19}
@@ -440,8 +440,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -16, y: -9, z: 0}
-  m_Size: {x: 33, y: 22, z: 1}
+  m_Origin: {x: -19, y: -9, z: 0}
+  m_Size: {x: 36, y: 22, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1640,9 +1640,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorTileMap: {fileID: 448285794}
   floorTile: {fileID: 11400000, guid: 9fdcaa8de66f7c9499b10cbef811dc18, type: 2}
+  wallTile: {fileID: 11400000, guid: ebd9ea65f80aedf43a0f3833fec2222d, type: 2}
   startPosition: {x: 0, y: 0}
-  iterationCount: 10
-  walkLength: 300
+  walkLength: 2000
+  iterationCount: 2
   iterationStartRandom: 1
 --- !u!1 &2028680050
 GameObject:
