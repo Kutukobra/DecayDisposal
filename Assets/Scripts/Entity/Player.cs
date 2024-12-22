@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    private static Player instance;
+
+    public Player GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        return instance;
+    }
+
     public float movementSpeed = 5f;
 
     [SerializeField]
@@ -31,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     bool isMoving = false;
     bool isAttacking = false;
+
+    // Wastes collected
+    public int wasteCount = 0;
 
     void Start()
     {

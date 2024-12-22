@@ -31,6 +31,30 @@ public class Direction2D
         return direction;
     }
 
+    public static Vector2 GetRandomDirectionf()
+    {
+        int directionIndex = Random.Range(0, 4);
+
+        var direction = new Vector2();
+        switch(directionIndex)
+        {
+            case 0:
+                direction = Vector2.up;
+                break;
+
+            case 1:
+                direction = Vector2.right;
+                break;
+            case 3:
+                direction = Vector2.down;
+                break;
+            case 4:
+                direction = Vector2.left;
+                break;
+        }
+        return direction;
+    }
+
     public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>
     {
         new Vector2Int(0, 1),  // Up

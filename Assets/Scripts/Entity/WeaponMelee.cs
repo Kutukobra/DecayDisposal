@@ -8,6 +8,7 @@ public class WeaponMelee : MonoBehaviour
 {
     public float range = 0.5f;
     public float attackDamage = 10;
+    public float knockbackForce = 0.5f;
     
     public LayerMask effectLayer;
 
@@ -21,7 +22,7 @@ public class WeaponMelee : MonoBehaviour
         {
             Debug.Log("Hit " + target.name);
             target.gameObject.GetComponent<HealthComponent>().TakeDamage(attackDamage);
-            target.gameObject.GetComponent<Knockback>().GetKnockback(transform, 1/range * attackDamage);
+            target.gameObject.GetComponent<Knockback>().GetKnockback(transform, knockbackForce);
         }
     }
 

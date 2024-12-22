@@ -16,24 +16,42 @@ public class MapManager : MonoBehaviour
     private TileBase wallTile;
 
     public Vector2Int startPosition;
-    public int walkLength;
-    public int iterationCount;
+
+    public int rootLength;
+    public int rootWidth;
+
+    public int roomCount;
+
+    public int roomSizeVariation;
+
+    public int roomWidth;
+    public int roomHeight;
     public bool iterationStartRandom = false;
 
     void Start()
     {
-        var generatedTiles = RandomWalk.GenerateRandomWalk(startPosition, walkLength, iterationCount, iterationStartRandom);
-
-        foreach(var tile in generatedTiles)
+        var floorTiles = new HashSet<Vector2Int>();
+        var currentPosition = new Vector2Int();
+        for (int i = 0; i < roomCount; i++)
         {
-            floorTileMap.SetTile(floorTileMap.WorldToCell((Vector3Int)tile), floorTile);
+            floorTiles.UnionWith(RandomWalk.GenerateSquare(currentPosition, roomWidth, roomHeight, roomSizeVariation));
+
+            var corridor = RandomWalk.GenerateCorridor(currentPosition, rootLength, rootWidth);
+            floorTiles.UnionWith(corridor);
+
+            currentPosition = corridor.ElementAt(corridor.Count() - 1);
         }
 
-        var walls = WallGenerator.FindWallPositions(generatedTiles);
+        var walls = WallGenerator.FindWallPositions(floorTiles);
         
         foreach(var wall in walls)
         {
             floorTileMap.SetTile(floorTileMap.WorldToCell((Vector3Int)wall), wallTile);
+        }
+
+        foreach(var floor in floorTiles)
+        {
+            floorTileMap.SetTile(floorTileMap.WorldToCell((Vector3Int)floor), floorTile);
         }
     }
 }

@@ -8,6 +8,12 @@ public class RangedMonster : MonoBehaviour
     Animator animator;
     Rigidbody2D rigidBody;
 
+    public SpriteRenderer sprite;
+
+    public Transform target;
+
+    private Vector2 targetDirection;
+
     void Awake()
     {
         healthComponent = GetComponent<HealthComponent>();
@@ -17,6 +23,10 @@ public class RangedMonster : MonoBehaviour
 
     void Update()
     {
+        targetDirection = (target.position - transform.position).normalized;
+        sprite.flipX = targetDirection.x < 0;
+
+
         animator.SetBool("dead", healthComponent.isDead);
     }
 }
