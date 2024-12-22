@@ -3,11 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    private static Player instance;
-
-    public static Player GetInstance()
+    public static Player Instance
     {
-        return instance;
+        get;
+        private set;
     }
 
     public float movementSpeed = 5f;
@@ -30,20 +29,22 @@ public class Player : MonoBehaviour
     public float nextAttackTime = 0;
 
     public WeaponMelee weapon;
+    private HealthComponent healthComponent;
 
     bool isMoving = false;
     bool isAttacking = false;
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
+        else
+        {
+            Instance = this;
+        }
+        
     }
 
     void Start()
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        healthComponent = GetComponent<HealthComponent>();
     }
 
     void Update()
@@ -110,5 +112,13 @@ public class Player : MonoBehaviour
     private void UpdatePosition()
     {
         rigidBody.velocity = direction * movementSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.tag == "EnemyProjectile")
+        {
+            healthComponent.TakeDamage(other.GetComponent<Projectile>().damage);
+        }
     }
 }

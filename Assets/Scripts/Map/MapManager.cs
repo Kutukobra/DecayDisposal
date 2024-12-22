@@ -28,10 +28,13 @@ public class MapManager : MonoBehaviour
     public int roomHeight;
     public bool iterationStartRandom = false;
 
+    public int enemyPerRoom = 5;
+
     private HashSet<Vector2Int> floorTiles = new();
     private HashSet<Vector2Int> walls;
 
-    public EnemyAI enemies;
+    public RangedMonster enemy;
+    public Waste waste;
 
     void Start()
     {
@@ -48,6 +51,8 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < roomCount; i++)
         {
             var room = RandomWalk.GenerateSquare(currentPosition, roomWidth, roomHeight, roomSizeVariation);
+
+            GenerateEntities(room);
 
             floorTiles.UnionWith(room);
 
@@ -72,6 +77,13 @@ public class MapManager : MonoBehaviour
 
     void GenerateEntities(HashSet<Vector2Int> room)
     {
-        
+        for (int j = 0; j < enemyPerRoom + roomCount; j++)
+        {
+            var spawnPosition = floorTileMap.WorldToCell((Vector3Int)room.ElementAt(Random.Range(0, room.Count())));
+            Instantiate(enemy, (Vector3)spawnPosition, Quaternion.identity);
+        }
+
+        var wastePosition = floorTileMap.WorldToCell((Vector3Int)room.ElementAt(Random.Range(0, room.Count())));
+        Instantiate(waste, (Vector3)wastePosition, Quaternion.identity);
     }
 }

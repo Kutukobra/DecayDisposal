@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour
 
     public IObjectPool<Projectile> objectPool;
 
+    [SerializeField]
+    private float timeoutDelay = 10f;
+
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -23,10 +26,25 @@ public class Projectile : MonoBehaviour
         rigidBody.velocity = direction * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    IEnumerator DeactivateRoutine(float delay)
     {
-        HealthComponent collisionHealth = col.gameObject.GetComponent<HealthComponent>();
-        collisionHealth?.TakeDamage(damage);
+        yield return new WaitForSeconds(delay);
+
+        // Reset Physics
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.angularVelocity = 0; 
+
+        objectPool.Release(this); 
+    }
+
+    public void Deactivate()
+    {
+        StartCoroutine(DeactivateRoutine(timeoutDelay));
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        StopAllCoroutines();
         objectPool.Release(this);
     }
 }

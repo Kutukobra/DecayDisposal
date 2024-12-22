@@ -34,5 +34,10 @@ public class HealthComponent : MonoBehaviour
         health -= value;
         isDead = health <= 0;
         animator?.SetBool("dead", isDead);
+
+        if (isDead)
+        {
+            Destroy(this.gameObject, 0.2f);
+        }
     }
 }
