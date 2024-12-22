@@ -30,7 +30,7 @@ public class RangedMonster : MonoBehaviour
 
     private readonly bool collectionCheck = false;
     private readonly int defaultCapacity = 20;
-    private readonly int maxSize = 20;
+    private readonly int maxSize = 30;
 
     void Awake()
     {
@@ -40,6 +40,8 @@ public class RangedMonster : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+
+        target = Player.GetInstance().transform;
     }
 
     void Update()

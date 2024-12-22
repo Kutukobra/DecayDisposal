@@ -5,13 +5,8 @@ public class Player : MonoBehaviour
 {
     private static Player instance;
 
-    public Player GetInstance()
+    public static Player GetInstance()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
         return instance;
     }
 
@@ -39,8 +34,17 @@ public class Player : MonoBehaviour
     bool isMoving = false;
     bool isAttacking = false;
 
-    // Wastes collected
-    public int wasteCount = 0;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {

@@ -28,13 +28,28 @@ public class MapManager : MonoBehaviour
     public int roomHeight;
     public bool iterationStartRandom = false;
 
+    private HashSet<Vector2Int> floorTiles = new();
+    private HashSet<Vector2Int> walls;
+
+    public EnemyAI enemies;
+
     void Start()
     {
-        var floorTiles = new HashSet<Vector2Int>();
+        GenerateMap();
+
+    }
+
+    void GenerateMap()
+    {
+        floorTileMap.ClearAllTiles();
+
         var currentPosition = new Vector2Int();
+        
         for (int i = 0; i < roomCount; i++)
         {
-            floorTiles.UnionWith(RandomWalk.GenerateSquare(currentPosition, roomWidth, roomHeight, roomSizeVariation));
+            var room = RandomWalk.GenerateSquare(currentPosition, roomWidth, roomHeight, roomSizeVariation);
+
+            floorTiles.UnionWith(room);
 
             var corridor = RandomWalk.GenerateCorridor(currentPosition, rootLength, rootWidth);
             floorTiles.UnionWith(corridor);
@@ -42,7 +57,7 @@ public class MapManager : MonoBehaviour
             currentPosition = corridor.ElementAt(corridor.Count() - 1);
         }
 
-        var walls = WallGenerator.FindWallPositions(floorTiles);
+        walls = WallGenerator.FindWallPositions(floorTiles);
         
         foreach(var wall in walls)
         {
@@ -53,5 +68,10 @@ public class MapManager : MonoBehaviour
         {
             floorTileMap.SetTile(floorTileMap.WorldToCell((Vector3Int)floor), floorTile);
         }
+    }
+
+    void GenerateEntities(HashSet<Vector2Int> room)
+    {
+        
     }
 }
