@@ -52,6 +52,8 @@ public class MapManager : MonoBehaviour
         {
             var room = RandomWalk.GenerateSquare(currentPosition, roomWidth, roomHeight, roomSizeVariation);
 
+            room.UnionWith(RandomWalk.GenerateRandomWalk(currentPosition, 10, 20, true));
+
             GenerateEntities(room);
 
             floorTiles.UnionWith(room);
@@ -77,7 +79,7 @@ public class MapManager : MonoBehaviour
 
     void GenerateEntities(HashSet<Vector2Int> room)
     {
-        for (int j = 0; j < enemyPerRoom + roomCount; j++)
+        for (int j = 0; j < enemyPerRoom; j++)
         {
             var spawnPosition = floorTileMap.WorldToCell((Vector3Int)room.ElementAt(Random.Range(0, room.Count())));
             Instantiate(enemy, (Vector3)spawnPosition, Quaternion.identity);

@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(DeactivateRoutine(timeoutDelay));
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         StopAllCoroutines();
         objectPool.Release(this);

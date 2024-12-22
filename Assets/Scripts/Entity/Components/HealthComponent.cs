@@ -37,7 +37,7 @@ public class HealthComponent : MonoBehaviour
 
         if (isDead)
         {
-            Destroy(this.gameObject, 0.2f);
+            Destroy(this.gameObject, 0.9f);
         }
     }
 }

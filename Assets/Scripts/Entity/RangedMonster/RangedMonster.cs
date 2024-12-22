@@ -39,12 +39,16 @@ public class RangedMonster : MonoBehaviour
 
     void Update()
     {
+        if (target == null)
+            return;
+            
         targetDirection = (target.position - projectileSpawnPoint.position).normalized;
         sprite.flipX = targetDirection.x < 0;
 
         animator.SetBool("dead", healthComponent.isDead);
 
-        Shoot();
+        if (Vector2.Distance(target.position, transform.position) < 10)
+            Shoot();
     }
 
     void Shoot()

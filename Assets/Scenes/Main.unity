@@ -1537,6 +1537,7 @@ MonoBehaviour:
   roomWidth: 10
   roomHeight: 10
   iterationStartRandom: 0
+  enemyPerRoom: 2
   enemy: {fileID: 6047361495031930241, guid: f420e7354664102458201998b6007474, type: 3}
   waste: {fileID: 690243294635910424, guid: d4ab27009559d054eb3ff6d403a92647, type: 3}
 --- !u!1 &2028680050
