@@ -30,8 +30,9 @@ public class HealthComponent : MonoBehaviour
     
     public void TakeDamage(float value)
     {
-        animator.SetTrigger("damaged");
+        animator?.SetTrigger("damaged");
         health -= value;
         isDead = health <= 0;
+        animator?.SetBool("dead", isDead);
     }
 }
