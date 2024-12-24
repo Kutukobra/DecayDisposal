@@ -5,6 +5,8 @@ using UnityEngine;
 public class HealthComponent : MonoBehaviour
 {
     Animator animator;
+    public AudioSource hit_sound;
+    public AudioSource death_sound;
 
     void Awake()
     {
@@ -30,6 +32,7 @@ public class HealthComponent : MonoBehaviour
     
     public void TakeDamage(float value)
     {
+        hit_sound.Play();
         animator?.SetTrigger("damaged");
         health -= value;
         isDead = health <= 0;
@@ -37,7 +40,8 @@ public class HealthComponent : MonoBehaviour
 
         if (isDead)
         {
-            Destroy(this.gameObject, 0.9f);
+            death_sound?.Play();
+            Destroy(this.gameObject, 1f);
         }
     }
 }

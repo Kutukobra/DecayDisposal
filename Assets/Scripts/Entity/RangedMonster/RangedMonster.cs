@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -54,7 +55,7 @@ public class RangedMonster : MonoBehaviour
     void Shoot()
     {
         if (Time.time < nextAttackTime)
-            return;
+            return;        
 
         nextAttackTime = Time.time + 1 / attackSpeed;
 

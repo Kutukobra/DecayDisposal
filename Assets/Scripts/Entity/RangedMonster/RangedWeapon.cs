@@ -16,7 +16,7 @@ public class RangedWeapon : MonoBehaviour
     private readonly int defaultCapacity = 30;
     private readonly int maxSize = 100;
 
-
+    public AudioSource shoot_sound;
 
     void Awake()
     {
@@ -28,6 +28,8 @@ public class RangedWeapon : MonoBehaviour
         Projectile projectileObject = objectPool.Get();
         if (projectileObject == null)
             return;
+
+        shoot_sound?.Play();
 
         projectileObject.transform.SetPositionAndRotation(projectileSpawnPoint.position, projectileSpawnPoint.rotation);
         projectileObject.direction = targetDirection;    

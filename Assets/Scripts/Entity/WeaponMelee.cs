@@ -12,6 +12,13 @@ public class WeaponMelee : MonoBehaviour
     
     public LayerMask effectLayer;
 
+    private AudioSource hit;
+
+    public void Awake()
+    {
+        hit = GetComponent<AudioSource>();
+    }
+
 
     public void Attack()
     {
@@ -20,7 +27,7 @@ public class WeaponMelee : MonoBehaviour
 
         foreach(var target in hitTargets)
         {
-            Debug.Log("Hit " + target.name);
+            hit?.Play();
             target.gameObject.GetComponent<HealthComponent>().TakeDamage(attackDamage);
             target.gameObject.GetComponent<Knockback>().GetKnockback(transform, knockbackForce);
         }
