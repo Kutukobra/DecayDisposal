@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,8 +27,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreCount;
     public Image healthBar;
 
+
+    private int highScore = 0;
+    private int score;
+
     void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore");
+
         mapManager = GetComponent<MapManager>();
 
         playerHealth = player.GetComponent<HealthComponent>();
@@ -37,6 +45,8 @@ public class GameManager : MonoBehaviour
     private int currentWasteCount = -1;
     void Update()
     {
+        score = playerWeapon.killCount + 2 * wasteCollection.wasteCount;
+
         if (wasteCollection.wasteCount % wastesBeforeNewGeneration == 0 && currentWasteCount != wasteCollection.wasteCount)
         {
             mapManager.GenerateMap(mapSpawnPoint);
@@ -49,6 +59,14 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateUI();
+
+        if (playerHealth.isDead)
+        {
+            if (score > highScore)
+                PlayerPrefs.SetInt("HighScore", score);
+                
+            StartCoroutine(GameOver());
+        }
     }
 
     void UpdateUI()
@@ -56,5 +74,11 @@ public class GameManager : MonoBehaviour
         wasteText.text = wasteCollection.wasteCount.ToString();
         scoreCount.text = "Kill: " + playerWeapon.killCount.ToString();
         healthBar.fillAmount = playerHealth.health / playerHealth.maxHealth;
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("MainMenu");
     }
 }
