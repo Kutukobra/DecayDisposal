@@ -7,8 +7,6 @@ public class WasteCollection : MonoBehaviour
 {
     public int wasteCount = 0;
 
-    public TextMeshProUGUI wasteText;
-
     public AudioSource pickup;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +14,6 @@ public class WasteCollection : MonoBehaviour
         if(other.transform.tag == "Waste")
         {
             wasteCount++;
-            wasteText.text = wasteCount.ToString();
             pickup.Play();
             Destroy(other.gameObject);
         }

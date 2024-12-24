@@ -44,4 +44,9 @@ public class HealthComponent : MonoBehaviour
             Destroy(this.gameObject, 1f);
         }
     }
+
+    public void Heal(float value)
+    {
+        health = health + value > maxHealth ? maxHealth : health + value;
+    }
 }

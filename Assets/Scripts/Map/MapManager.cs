@@ -36,17 +36,15 @@ public class MapManager : MonoBehaviour
     public RangedMonster enemy;
     public Waste waste;
 
-    void Start()
-    {
-        GenerateMap();
+    [SerializeField]
+    private AudioSource generate_map;
 
-    }
-
-    void GenerateMap()
+    public void GenerateMap(Vector2Int position)
     {
+        generate_map.Play();
         floorTileMap.ClearAllTiles();
 
-        var currentPosition = new Vector2Int();
+        var currentPosition = startPosition;
         
         for (int i = 0; i < roomCount; i++)
         {
