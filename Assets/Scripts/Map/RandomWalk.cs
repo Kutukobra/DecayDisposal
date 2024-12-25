@@ -34,12 +34,11 @@ public class RandomWalk
         for (int i = 0; i < walkLength; i++)
         {
             walk.Add(currentPosition);
-            
+
             newPosition = currentPosition + Direction2D.GetRandomDirection();
 
             currentPosition = newPosition;
         }
-
         return walk;
     }
 

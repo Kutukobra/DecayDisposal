@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreCount;
     public Image healthBar;
 
-
     private int highScore = 0;
     private int score;
 
@@ -53,8 +52,6 @@ public class GameManager : MonoBehaviour
             mapSpawnPoint = new Vector2Int((int)newMapPosition.x, (int)newMapPosition.y);
 
             currentWasteCount = wasteCollection.wasteCount;
-
-            playerHealth.Heal(50);
         }
 
         UpdateUI();
