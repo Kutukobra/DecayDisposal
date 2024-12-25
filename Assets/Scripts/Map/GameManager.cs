@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -64,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             if (score > highScore)
                 PlayerPrefs.SetInt("HighScore", score);
-                
+
             StartCoroutine(GameOver());
         }
     }
