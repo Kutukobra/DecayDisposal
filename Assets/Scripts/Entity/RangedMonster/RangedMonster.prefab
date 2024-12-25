@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -7347813661966308975}
   - component: {fileID: 6645100627568305512}
   - component: {fileID: 2018308790149014560}
+  - component: {fileID: 8526812918374871896}
   m_Layer: 6
   m_Name: RangedMonster
   m_TagString: Untagged
@@ -527,6 +528,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8526812918374871896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792734641494470891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6ed6023b82a66498ef009953c60086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roamRadius: 10
+  movementSpeed: 3
+  roamInterval: 5
 --- !u!1 &4833370744503932812
 GameObject:
   m_ObjectHideFlags: 0

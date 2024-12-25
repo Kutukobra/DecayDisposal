@@ -2171,9 +2171,9 @@ MonoBehaviour:
   rootLength: 15
   rootWidth: 3
   roomCount: 5
-  roomSizeVariation: 0
-  roomWidth: 0
-  roomHeight: 0
+  roomSizeVariation: 10
+  roomWidth: 7
+  roomHeight: 7
   iterationStartRandom: 0
   enemyPerRoom: 2
   enemy: {fileID: 6047361495031930241, guid: f420e7354664102458201998b6007474, type: 3}
